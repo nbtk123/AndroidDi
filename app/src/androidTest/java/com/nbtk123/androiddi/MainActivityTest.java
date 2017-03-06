@@ -40,7 +40,7 @@ public class MainActivityTest {
         RandomStringFactory fakeRandomStringFactory = createFakeRandomStringFactory();
 
         //Providing the fake RandomStringFactory instance to the DI tree.
-        //NOTE: We don't have to provide NetworkClient here SINCE IT HAS CONSTRUCTOR WITHOUT PARAMETERS!
+        //NOTE: We don't have to provide NetworkClientModule here since it has constructor without parameters! Dagger2 generates it for us
         App.appComponent = DaggerAppComponent.builder().randomStringFactoryModule(new RandomStringFactoryModule(fakeRandomStringFactory)).build();
 
         // Lunach the activity.
@@ -64,7 +64,7 @@ public class MainActivityTest {
         NetworkClient fakeNetworkClient = createFakeNetworkClient();
 
         //Providing the fake instance to the DI tree.
-        //NOTE: We don't have to provide RandomStringFactory here SINCE IT HAS CONSTRUCTOR WITHOUT PARAMETERS!
+        //NOTE: We don't have to provide RandomStringFactoryModule here since it has constructor without parameters! Dagger2 generates it for us
         App.appComponent = DaggerAppComponent.builder().networkClientModule(new NetworkClientModule(fakeNetworkClient)).build();
 
         // Lunach the activity.
@@ -90,7 +90,6 @@ public class MainActivityTest {
         RandomStringFactory fakeRandomStringFactory = createFakeRandomStringFactory();
 
         //Providing the fake instance to the DI tree.
-        //NOTE: We don't have to provide RandomStringFactory here SINCE IT HAS CONSTRUCTOR WITHOUT PARAMETERS!
         App.appComponent = DaggerAppComponent.builder()
                 .networkClientModule(new NetworkClientModule(fakeNetworkClient))
                 .randomStringFactoryModule(new RandomStringFactoryModule(fakeRandomStringFactory)).build();

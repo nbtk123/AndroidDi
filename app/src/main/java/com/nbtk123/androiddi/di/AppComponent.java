@@ -7,7 +7,10 @@ import dagger.Component;
 /**
  * Created by nir on 05/03/17.
  */
-@Component(modules = {RandomStringFactoryModule.class, NetworkClientModule.class})
+@Component(modules = {
+        RandomStringFactoryModule.class,
+        NetworkClientModule.class
+})
 public interface AppComponent {
     void inject (MainActivity mainActivity);
 
