@@ -4,32 +4,37 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import com.nbtk123.androiddi.App;
 import com.nbtk123.androiddi.R;
-import com.nbtk123.androiddi.ads.AdFactory;
-import com.nbtk123.androiddi.di.DaggerComponentsManager;
 import com.nbtk123.androiddi.network.NetworkClient;
+import com.nbtk123.androiddi.randomstring.RandomStringFactory;
 
 import javax.inject.Inject;
 
 public class MainActivity extends AppCompatActivity {
 
     @Inject
-    NetworkClient networkClient;
+    RandomStringFactory randomStringFactory;
 
     @Inject
-    AdFactory adFactory;
+    NetworkClient networkClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        DaggerComponentsManager.adFactoryComponent.inject(this);
-        DaggerComponentsManager.networkComponent.inject(this);
+        App.appComponent.inject(this);
 
-        TextView tvAdContent = (TextView) findViewById(R.id.tvAdContent);
+        final TextView tvRandomString = (TextView) findViewById(R.id.tvRandomString);
         final TextView tvHttpResponse = (TextView) findViewById(R.id.tvHttpResponse);
 
+        tvRandomString.setText(randomStringFactory.createString());
+
+        // This example is not about Andorid Best Practices.
+        // want to keep it minimal for DI.
+        // So ignore the context leak etc.
+        // The DI concept is the same for Retrofit / Volley / Whatever
         networkClient.performHttpGetRequest("some url", new NetworkClient.ResponseListener() {
             @Override
             public void onResponse(String response) {

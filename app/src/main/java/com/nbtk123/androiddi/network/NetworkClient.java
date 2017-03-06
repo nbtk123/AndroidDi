@@ -11,11 +11,6 @@ import javax.inject.Inject;
 
 public class NetworkClient {
 
-    @Inject
-    public NetworkClient() {
-
-    }
-
     public interface ResponseListener {
         void onResponse(String response);
     }
@@ -23,7 +18,7 @@ public class NetworkClient {
     public void performHttpGetRequest(String url, final ResponseListener listener) {
 
         /**
-         * I don't want to stick to any network implementation here (Retrofit / Volley / HTTPUrlconnection)
+         * Again, I don't want to stick to any network implementation here (Retrofit / Volley / HTTPUrlconnection)
          * for keeping this example focused on DI.
          */
 
